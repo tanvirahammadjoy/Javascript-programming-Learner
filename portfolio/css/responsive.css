@@ -1,0 +1,17 @@
+@media (max-width: 768px) {
+  nav ul {
+    display: none;
+  }
+
+  section {
+    padding: 2rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  section {
+    padding: 1rem;
+  }
+}
+
+/* Add more responsive styles as needed */
