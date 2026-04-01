@@ -1,6 +1,8 @@
 const container = document.getElementById("projects-container");
 const toggleBtn = document.getElementById("theme-toggle");
+import projects from "./projects.js";
 
+// ======================== 1) Create project cards dynamically ========================
 // Create project cards
 projects.forEach((project) => {
   const card = document.createElement("div");

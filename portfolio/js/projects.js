@@ -15,3 +15,5 @@ const projects = [
     link: "#",
   },
 ];
+
+export default projects;
