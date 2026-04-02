@@ -641,3 +641,303 @@ textarea.invalid {
     opacity: 0;
   }
 }
+
+/* ─── SCROLL PROGRESS ─────────────────── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9998;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(
+    to right,
+    var(--color-primary),
+    color-mix(in srgb, var(--color-primary) 60%, #a855f7)
+  );
+  transition: width 100ms linear;
+  border-radius: 0 2px 2px 0;
+}
+
+/* ─── GRAIN OVERLAY ───────────────────── */
+.grain {
+  position: fixed;
+  inset: -200%;
+  z-index: 9997;
+  width: 400%;
+  height: 400%;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='[w3.org](http://www.w3.org/2000/svg)'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  animation: grain 0.5s steps(2) infinite;
+}
+
+@keyframes grain {
+  0%  { transform: translate(0, 0); }
+  25% { transform: translate(-1%, 1%); }
+  50% { transform: translate(1%, -1%); }
+  75% { transform: translate(-1%, -1%); }
+  100%{ transform: translate(1%, 1%); }
+}
+
+/* ─── COMMAND PALETTE ─────────────────── */
+.command-palette {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 15vh;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity var(--t-base), visibility var(--t-base);
+}
+
+.command-palette.is-open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.command-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+}
+
+.command-box {
+  position: relative;
+  z-index: 1;
+  width: min(90vw, 580px);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  transform: translateY(-8px) scale(0.98);
+  transition: transform var(--t-base);
+}
+
+.command-palette.is-open .command-box {
+  transform: none;
+}
+
+.command-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-4) var(--sp-5);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.command-search-icon {
+  flex-shrink: 0;
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--color-text-muted);
+}
+
+.command-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  font-size: var(--text-base);
+  padding: 0;
+}
+
+.command-input:focus { outline: none; }
+
+.command-esc-hint {
+  flex-shrink: 0;
+  padding: 0.2rem 0.4rem;
+  font-size: var(--text-sm);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+}
+
+.command-results {
+  list-style: none;
+  margin: 0;
+  padding: var(--sp-2);
+  max-height: 340px;
+  overflow-y: auto;
+}
+
+.command-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  transition: background var(--t-fast);
+}
+
+.command-item:hover,
+.command-item[aria-selected="true"] {
+  background: var(--color-surface);
+}
+
+.command-item-icon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-raised);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.command-item-label { font-weight: 500; }
+
+.command-item-hint {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.command-footer {
+  display: flex;
+  gap: var(--sp-5);
+  padding: var(--sp-3) var(--sp-5);
+  border-top: 1px solid var(--color-border);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.command-footer kbd {
+  padding: 0.1rem 0.3rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+  font-family: inherit;
+}
+
+/* ─── PROJECT MODAL ───────────────────── */
+.project-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-4);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity var(--t-base), visibility var(--t-base);
+}
+
+.project-modal.is-open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+}
+
+.modal-box {
+  position: relative;
+  z-index: 1;
+  width: min(90vw, 800px);
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  transform: scale(0.95) translateY(16px);
+  transition: transform var(--t-base);
+}
+
+.project-modal.is-open .modal-box {
+  transform: none;
+}
+
+.modal-close {
+  position: sticky;
+  top: var(--sp-4);
+  float: right;
+  margin: var(--sp-4) var(--sp-4) 0 0;
+  z-index: 1;
+}
+
+.modal-content {
+  padding: var(--sp-6) var(--sp-8) var(--sp-8);
+  clear: both;
+}
+
+.modal-content img {
+  width: 100%;
+  border-radius: var(--radius-md);
+  margin-bottom: var(--sp-5);
+  border: 1px solid var(--color-border);
+}
+
+.modal-content h2 { margin-top: 0; }
+
+.modal-meta {
+  display: flex;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--sp-5);
+}
+
+.modal-section {
+  margin-top: var(--sp-5);
+}
+
+.modal-section h3 {
+  font-size: var(--text-base);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  margin-bottom: var(--sp-3);
+}
+
+.modal-links {
+  display: flex;
+  gap: var(--sp-3);
+  margin-top: var(--sp-6);
+}
+
+/* ─── STAGGER HELPER ──────────────────── */
+.stagger-children > * {
+  transition-delay: calc(var(--stagger-index, 0) * 80ms);
+}
+
+/* ─── TILT CARD ───────────────────────── */
+.project-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* ─── HIGH CONTRAST ───────────────────── */
+@media (prefers-contrast: more) {
+  :root {
+    --color-border: #000;
+    --color-text-muted: var(--color-text);
+  }
+  [data-theme="dark"] {
+    --color-border: #fff;
+    --color-text-muted: var(--color-text);
+  }
+  .project-card,
+  .contact-form,
+  .skill-item {
+    border-width: 2px;
+  }
+}
+

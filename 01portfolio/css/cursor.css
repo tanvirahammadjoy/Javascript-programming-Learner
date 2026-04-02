@@ -1,0 +1,59 @@
+/* Hide on touch devices */
+@media (hover: none) {
+  .cursor {
+    display: none;
+  }
+}
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+}
+
+.cursor-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition:
+    transform 80ms var(--ease),
+    opacity 150ms;
+}
+
+.cursor-ring {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition:
+    width 250ms var(--ease),
+    height 250ms var(--ease),
+    border-color 250ms var(--ease),
+    transform 80ms var(--ease);
+}
+
+/* Hover states driven by data-cursor on the root */
+[data-cursor="link"] .cursor-ring {
+  width: 56px;
+  height: 56px;
+  border-color: rgba(255, 255, 255, 0.9);
+}
+
+[data-cursor="text"] .cursor-dot {
+  transform: translate(-50%, -50%) scale(5);
+  opacity: 0.15;
+}
+
+[data-cursor="drag"] .cursor-ring {
+  width: 64px;
+  height: 64px;
+  border-style: dashed;
+}

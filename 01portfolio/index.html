@@ -52,11 +52,31 @@
     <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/components.css" />
     <link rel="stylesheet" href="css/utilities.css" />
+    <link rel="stylesheet" href="css/cursor.css" />
+    <link rel="stylesheet" href="css/print.css" media="print" />
   </head>
 
   <body>
     <!-- Skip Link -->
     <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <!-- Custom cursor — place right after <body> opens -->
+    <div id="cursor" class="cursor" aria-hidden="true">
+      <div class="cursor-dot"></div>
+      <div class="cursor-ring"></div>
+    </div>
+    <!-- Scroll progress bar — place right after cursor div -->
+    <div
+      id="scroll-progress"
+      class="scroll-progress"
+      role="progressbar"
+      aria-label="Page scroll progress"
+      aria-valuenow="0"
+      aria-valuemin="0"
+      aria-valuemax="100"
+    ></div>
+    <!-- Grain overlay — place right after scroll-progress div -->
+    <div class="grain" aria-hidden="true"></div>
 
     <!-- ─── HEADER ─────────────────────────── -->
     <header class="site-header" id="site-header">
@@ -426,5 +446,81 @@
 
     <!-- JS as modules -->
     <script type="module" src="js/app.js"></script>
+    <div
+      id="command-palette"
+      class="command-palette"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Command palette"
+      aria-hidden="true"
+    >
+      <div class="command-backdrop" id="command-backdrop"></div>
+      <div class="command-box">
+        <div class="command-search-wrap">
+          <svg
+            class="command-search-icon"
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.35-4.35" />
+          </svg>
+          <input
+            id="command-input"
+            class="command-input"
+            type="text"
+            placeholder="Search or jump to…"
+            autocomplete="off"
+            aria-autocomplete="list"
+            aria-controls="command-results"
+          />
+          <kbd class="command-esc-hint">esc</kbd>
+        </div>
+        <ul
+          id="command-results"
+          class="command-results"
+          role="listbox"
+          aria-label="Navigation options"
+        ></ul>
+        <div class="command-footer">
+          <span><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
+          <span><kbd>↵</kbd> select</span>
+          <span><kbd>esc</kbd> close</span>
+        </div>
+      </div>
+    </div>
+    <!-- Project modal -->
+    <div
+      id="project-modal"
+      class="project-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      aria-hidden="true"
+    >
+      <div class="modal-backdrop" id="modal-backdrop"></div>
+      <div class="modal-box">
+        <button
+          id="modal-close"
+          class="modal-close icon-btn"
+          type="button"
+          aria-label="Close project details"
+        >
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </button>
+        <div id="modal-content" class="modal-content"></div>
+      </div>
+    </div>
   </body>
 </html>

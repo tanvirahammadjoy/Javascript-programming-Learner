@@ -1,0 +1,55 @@
+@media print {
+  /* Hide non-essential elements */
+  .site-header,
+  .hero-visual,
+  .filter-bar,
+  .project-links,
+  .cursor,
+  .scroll-progress,
+  .grain,
+  .nav-toggle,
+  .theme-toggle,
+  .hero-actions .button-ghost,
+  .site-footer .social-links {
+    display: none !important;
+  }
+
+  body {
+    font-size: 11pt;
+    color: #000;
+    background: #fff;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 2rem 0;
+  }
+
+  h1 {
+    font-size: 22pt;
+  }
+  h2 {
+    font-size: 16pt;
+    border-bottom: 1pt solid #ccc;
+    padding-bottom: 4pt;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #555;
+  }
+
+  .project-card {
+    break-inside: avoid;
+    border: 1pt solid #ccc;
+  }
+
+  @page {
+    margin: 1.5cm;
+  }
+}
